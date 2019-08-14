@@ -10,6 +10,27 @@
     <div>
         Hello World?
     </div>
+
+    <!-- 
+Matter JS Gravity Experiment
+http://brm.io/matter-js/
+
+-->
+<div id="controls">
+        <div id="x-axis" class="axis">
+          <label for="gravity-x">x-axis</label>
+          <input id="gravity-x" type="range" value="0" min="-1" max="1" step=".1" oninput="gravOutputUpdate('x-val', 'x', value);">
+          <ouput for="gravity-x" id="x-val" class="output">0</output>
+        </div>
+      
+        <div id="y-axis" class="axis">
+          <label for="gravity-y">y-axis</label>
+          <input id="gravity-y" type="range" value=".1" min="-1" max="1" step=".1" oninput="gravOutputUpdate('y-val', 'y', value)">
+          <output for="gravity-y" id="y-val" class="output">.1</output>
+        </div>
+      </div>
+
+      
     <!-- =========================================================================================== -->
     <script src="bundle.js"></script>
 </body>
