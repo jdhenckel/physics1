@@ -1,0 +1,43 @@
+{
+    "name": "physics1",
+    "version": "1.0.0",
+    "description": "a sandbox physics game",
+    "main": "main.js",
+    "scripts": {
+        "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+        "build": "webpack --mode production",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jdhenckel/physics1.git"
+    },
+    "author": "John Henckel",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/jdhenckel/physics1/issues"
+    },
+    "homepage": "https://github.com/jdhenckel/physics1#readme",
+    "keywords": [],
+    "devDependencies": {
+        "@types/node": "*",
+        "@types/webpack-env": "*",
+        "ajv": "*",
+        "copy-webpack-plugin": "*",
+        "css-loader": "*",
+        "node-sass": "*",
+        "sass-loader": "*",
+        "style-loader": "*",
+        "ts-loader": "*",
+        "ts-node": "*",
+        "typescript": "*",
+        "url-loader": "*",
+        "webpack": "*",
+        "webpack-cli": "*",
+        "webpack-dev-server": "*"
+    },
+    "dependencies": {
+        "axios": "*",
+        "ts-polyfill": "*"
+    }
+}
