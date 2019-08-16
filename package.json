@@ -21,6 +21,7 @@
     "keywords": [],
     "devDependencies": {
         "@types/node": "*",
+        "@types/matter-js": "^0.10.2",
         "@types/webpack-env": "*",
         "ajv": "*",
         "copy-webpack-plugin": "*",
