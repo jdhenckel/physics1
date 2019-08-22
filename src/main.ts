@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Utils } from './utils';
-import { Manager, Pinch, Rotate, Tap, Press } from 'hammerjs';
+import { Manager, Pinch, Rotate, Tap, Press, Pan } from 'hammerjs';
 import { Engine, World, Render, Body, Bodies, Runner, Constraint, Composites, MouseConstraint } from 'matter-js';
 
 
@@ -32,17 +32,17 @@ export class MainApp {
         var press = new Press();
 
         // we want to detect both the same time
-        pinch.recognizeWith(rotate);
+        //pinch.recognizeWith(rotate);
 
         // add to the Manager
-        mc.add([pinch, rotate, tap, press]);
-
-      //  mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+        mc.add([pinch, rotate, tap, press, new Pan()]);
 
         // listen to events...
-        mc.on('pinch rotate panleft panright panup pandown tap press', (ev: any) => {
+        mc.on('pinch rotate pan tap press', (ev: any) => {
             //console.log('Hammer',ev.type);
-            log.innerHTML += '<br>type = ' + ev.type + ' ' + ev.distance + ' ' + ev.angle;
+            log.innerHTML = '<br><pre>' + // ev.type + ' ' + ev.distance + ' ' + ev.angle;
+
+            JSON.stringify(ev,null,4).substr(238);
         });
     }
 
