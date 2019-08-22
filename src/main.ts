@@ -35,8 +35,10 @@ export class MainApp {
         //pinch.recognizeWith(rotate);
 
         // add to the Manager
-        mc.add([pinch, rotate, tap, press, new Pan()]);
+        mc.add([pinch, rotate]); //, tap, press, new Pan()]);
 
+        pinch.recognizeWith(rotate);
+        rotate.requireFailure(pinch);
         
         // listen to events...
         mc.on('pinch rotate pan tap press', (ev: any) => {
