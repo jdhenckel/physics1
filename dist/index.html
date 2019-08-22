@@ -5,12 +5,12 @@
     <title>Physics1</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
 </head>
-<body style="font-family: 'Open Sans', Arial, Helvetica, sans-serif">
-    <!-- =========================================================================================== -->
-    <div>
-        Hello World?
-    </div>
-    <!-- =========================================================================================== -->
+<body style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; margin: 0">
+    <canvas id="physics"
+    onmousemove="app.onMouseMove(event)"
+    onclick="app.onClick(event)"
+    onmousedown="app.onMouseDown(event)"
+    ></canvas>
     <script src="bundle.js"></script>
 </body>
 </html>
