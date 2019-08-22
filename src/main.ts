@@ -37,12 +37,14 @@ export class MainApp {
         // add to the Manager
         mc.add([pinch, rotate, tap, press, new Pan()]);
 
+        
         // listen to events...
         mc.on('pinch rotate pan tap press', (ev: any) => {
             //console.log('Hammer',ev.type);
+            var x = JSON.stringify(ev,null,4);
             log.innerHTML = '<br><pre>' + // ev.type + ' ' + ev.distance + ' ' + ev.angle;
 
-            JSON.stringify(ev,null,4).substr(238);
+            x.substr(x.indexOf('isFirst'));
         });
     }
 
