@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Utils } from './utils';
-import { Manager, Pinch, Rotate } from 'hammerjs';
+import { Manager, Pinch, Rotate, Tap, Press } from 'hammerjs';
 import { Engine, World, Render, Body, Bodies, Runner, Constraint, Composites, MouseConstraint } from 'matter-js';
 
 
@@ -21,25 +21,34 @@ export class MainApp {
     }
 
     setupControl() {
-        var myElement = document.getElementById('physics');
-
-        var mc = new Manager(myElement);
+        var log = document.getElementById('log');
+        var mc = new Manager(log); //document.getElementById('physics'));
 
         // create a pinch and rotate recognizer
         // these require 2 pointers
         var pinch = new Pinch();
         var rotate = new Rotate();
+        var tap = new Tap();
+        var press = new Press();
 
         // we want to detect both the same time
         pinch.recognizeWith(rotate);
 
         // add to the Manager
-        mc.add([pinch, rotate]);
+        mc.add([pinch, rotate, tap, press]);
 
+      //  mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
-        mc.on("pinch rotate", function(ev) {
-            console.log(ev.type);
+        // listen to events...
+        mc.on('pinch rotate panleft panright panup pandown tap press', (ev: any) => {
+            //console.log('Hammer',ev.type);
+            log.innerHTML += '<br>type = ' + ev.type + ' ' + ev.distance + ' ' + ev.angle;
         });
+    }
+
+    toggleMode(e:HTMLButtonElement) {
+        var log = document.getElementById('log');
+        log.innerHTML = '';
     }
 
     setupEngine() {
@@ -52,8 +61,7 @@ export class MainApp {
         this.world = this.engine.world;
 
         //add a mouse-controlled constraint
-        var mouseConstraint = MouseConstraint.create(this.engine);
-        World.add(this.world, mouseConstraint);
+        //var mouseConstraint = MouseConstraint.create(this.engine);        World.add(this.world, mouseConstraint);
 
         // create a load of circle bodies
         var stack = Composites.stack(250, 5, 12, 2, 0, 0, (x: number, y: number, column: number, row: number) => {
@@ -101,7 +109,7 @@ export class MainApp {
 
     setCanvasSize() {
         this.canvas.width = window.innerWidth - 4;
-        this.canvas.height = window.innerHeight - 5;
+        this.canvas.height = window.innerHeight / 2 - 5;
     }
 
     onMouseDown(e:MouseEvent) {
@@ -111,8 +119,8 @@ export class MainApp {
         if (e.buttons > 0)
         console.log('drag ',e.buttons);
     }
-    onClick(e:MouseEvent) {
-        console.log('click ',e);
+    onMouseUp(e:MouseEvent) {
+        console.log('mouse up ',e);
     }
 }
 

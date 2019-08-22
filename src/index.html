@@ -4,14 +4,47 @@
     <meta name="viewport" content="user-scalable=0" />
     <title>Physics1</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+<style>
+body {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif; 
+    margin: 0;
+}    
+
+canvas {
+    position: absolute;
+    top: 0;
+}
+
+.controls {
+    position: absolute;
+    top: 50vh;
+}
+
+#log {
+    height: calc(50vh - 30px);
+    width: 90vw;
+    overflow: auto;
+    background-color: #dfdfdf;
+}
+
+</style>
 </head>
-<body style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; margin: 0">
-    <canvas id="physics"
+<body>
+    <div class="controls">
+        <button onclick="app.toggleMode(this)">mode</button>
+        <div id="log">Begin log.</div>
+    </div>
+    <canvas id="physics"></canvas>
+    <script src="bundle.js"></script>
+
+    <!--
+
     onmousemove="app.onMouseMove(event)"
     onclick="app.onClick(event)"
     onmousedown="app.onMouseDown(event)"
-    ></canvas>
-    <script src="bundle.js"></script>
+
+
+    -->
 </body>
 </html>
 
