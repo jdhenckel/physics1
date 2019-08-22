@@ -79,7 +79,6 @@ export class MainApp {
             element: document.body,
             engine: this.engine,
             options: {
-                showVelocity: false,
                 hasBounds: true,
                 wireframes: false,
                 width: this.canvas.width,
@@ -90,7 +89,7 @@ export class MainApp {
 
         Render.run(this.render);
 
-        this.runner = Runner.create();
+        this.runner = Runner.create(null);
         Runner.run(this.runner, this.engine);
     }
 
