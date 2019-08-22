@@ -37,11 +37,13 @@ export class MainApp {
         // add to the Manager
         mc.add([pinch, rotate]); //, tap, press, new Pan()]);
 
-        pinch.recognizeWith(rotate);
-        rotate.requireFailure(pinch);
+        //pinch.recognizeWith(rotate);
+        //rotate.requireFailure(pinch);
         
         // listen to events...
         mc.on('pinch rotate pan tap press', (ev: any) => {
+            ev.preventDefault();
+            
             //console.log('Hammer',ev.type);
             var x = JSON.stringify(ev,null,4);
             log.innerHTML = '<br><pre>' + // ev.type + ' ' + ev.distance + ' ' + ev.angle;
