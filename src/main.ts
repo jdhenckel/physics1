@@ -44,7 +44,8 @@ export class MainApp {
         // listen to events...
         mc.on('pinch rotate pan', (ev: any) => {
             //ev.preventDefault();
-            log.innerHTML = '<br>'+ ev.type + '<br>' +JSON.stringify(ev);
+            log.innerHTML = '<br>'+ ev.type + ' sc ' + ev.scale.toFixed(2) + ' ro ' + ev.rotation.toFixed(2) +
+             ' y ' + ev.deltaY + ' x ' + ev.deltaX + ' a ' + ev.angle.toFixed(2) + ' d ' + ev.distance.toFixed(2) + '<br>' +JSON.stringify(ev);
         });
     }
 
