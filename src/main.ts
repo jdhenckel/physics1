@@ -22,7 +22,7 @@ export class MainApp {
 
     setupControl() {
         var log = document.getElementById('log');
-        var mc = new Manager(log); //document.getElementById('physics'));
+        var mc = new Manager(document.getElementById('physics'));
 
         // create a pinch and rotate recognizer
         // these require 2 pointers
@@ -30,25 +30,21 @@ export class MainApp {
         var rotate = new Rotate();
         var tap = new Tap();
         var press = new Press();
+        var pan = new Pan();
 
         // we want to detect both the same time
         //pinch.recognizeWith(rotate);
 
         // add to the Manager
-        mc.add([pinch, rotate]); //, tap, press, new Pan()]);
+        mc.add([pinch, rotate, pan]); //, tap, press, new Pan()]);
 
         //pinch.recognizeWith(rotate);
         //rotate.requireFailure(pinch);
         
         // listen to events...
-        mc.on('pinch rotate pan tap press', (ev: any) => {
-            ev.preventDefault();
-            
-            //console.log('Hammer',ev.type);
-            var x = JSON.stringify(ev,null,4);
-            log.innerHTML = '<br><pre>' + // ev.type + ' ' + ev.distance + ' ' + ev.angle;
-
-            x.substr(x.indexOf('isFirst'));
+        mc.on('pinch rotate pan', (ev: any) => {
+            //ev.preventDefault();
+            log.innerHTML = '<br>'+ ev.type + '<br>' +JSON.stringify(ev);
         });
     }
 
