@@ -13,8 +13,10 @@ export class MainApp {
     runner: Runner;
     render: Render;
     canvas: HTMLCanvasElement;
+    state: any;
 
     boot() {
+        this.state = {};
         this.createCanvas();
         this.setupEngine();
         this.setupControl();
@@ -22,7 +24,7 @@ export class MainApp {
 
     setupControl() {
         var log = document.getElementById('log');
-        var mc = new Manager(document.getElementById('physics'));
+        var mc = new Manager(this.canvas);
 
         // create a pinch and rotate recognizer
         // these require 2 pointers
@@ -46,7 +48,25 @@ export class MainApp {
             //ev.preventDefault();
             log.innerHTML = '<br>'+ ev.type + ' sc ' + ev.scale.toFixed(2) + ' ro ' + ev.rotation.toFixed(2) +
              ' y ' + ev.deltaY + ' x ' + ev.deltaX + ' a ' + ev.angle.toFixed(2) + ' d ' + ev.distance.toFixed(2) + '<br>' +JSON.stringify(ev);
+
+            if (this.state.x) { 
+            this.doPinch(ev.rotation - this.state.rot, ev.scale - this.state.scale,
+                ev.deltaX - this.state.x, ev.deltaY - this.state.y);
+            }
+            this.state.x = ev.isFinal ? 0 : ev.deltaX; 
+            this.state.y = ev.deltaY;
+            this.state.rot = ev.rotation;
+            this.state.scale = ev.scale;
         });
+    }
+
+        
+    doPinch(da:number,ds:number,dx:number,dy:number) {
+        var gc = this.canvas.getContext('2d');
+        gc.rotate(da * 3.1415926 / 180);
+        var s = (ds + 1)/1;
+        gc.scale(s,s);
+        gc.translate(dx,dy);
     }
 
     toggleMode(e:HTMLButtonElement) {
@@ -90,10 +110,9 @@ export class MainApp {
             element: document.body,
             engine: this.engine,
             options: {
-                hasBounds: true,
                 wireframes: false,
                 width: this.canvas.width,
-                height: this.canvas.height                
+                height: this.canvas.height
             },
             canvas: this.canvas,
         });
