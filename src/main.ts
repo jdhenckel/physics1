@@ -74,6 +74,23 @@ export class MainApp {
         log.innerHTML = '';
     }
 
+    onDblClick(e:Event) {
+        document.getElementById('dialog').classList.toggle('show');
+    }
+
+    onDebug(e:Event) {
+        (e.target as HTMLElement).classList.toggle('bright');
+        document.getElementById('log').classList.toggle('show');
+    }
+
+    onDraw(e:Event) {
+
+    }
+
+    onPlay(e:Event) {
+
+    }
+
     setupEngine() {
         // You are supposed to call Engine.create with an object that has a 
         //property render that has properties element and canvas. If y
@@ -130,8 +147,8 @@ export class MainApp {
     }
 
     setCanvasSize() {
-        this.canvas.width = window.innerWidth - 4;
-        this.canvas.height = window.innerHeight / 2 - 5;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight ;
     }
 
     onMouseDown(e:MouseEvent) {
